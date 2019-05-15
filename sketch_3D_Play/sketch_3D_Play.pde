@@ -22,12 +22,13 @@ void draw() {
 void drawColors() {
   background(255);
   
-  translate(500, 400, 125);
+  translate(mouseX, mouseY, 125);
   rotateX(rotationX);
   rotateY(rotationY);
   rotationX += 0.05;
   rotationY += 0.10;
   
+  //Front Face
   beginShape();
   color red = color(255, 0, 0);
   fill(red);
@@ -37,6 +38,7 @@ void drawColors() {
   vertex(125, -125, -125);
   endShape();
   
+  //Top Face
   beginShape();
   color green = color(0,255,0);
   fill(green);
@@ -46,6 +48,7 @@ void drawColors() {
   vertex(125, -125, -125);
   endShape();
   
+  //Right Face
   beginShape();
   color blue = color(0,0,255);
   fill(blue);
@@ -55,6 +58,7 @@ void drawColors() {
   vertex(125, 125, -125);
   endShape();
   
+  //Bottom Face
   beginShape();
   color cyan = color(0,255,255);
   fill(cyan);
@@ -64,6 +68,7 @@ void drawColors() {
   vertex(-125, 125, -125);
   endShape();
   
+  //Left Face
   beginShape();
   color yellow = color(255,255,0);
   fill(yellow);
@@ -73,6 +78,7 @@ void drawColors() {
   vertex(-125, 125, -125);
   endShape();
   
+  //Rear Face
   beginShape();
   color magenta = color(255,0,255);
   fill(magenta);
