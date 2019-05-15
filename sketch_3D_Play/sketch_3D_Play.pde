@@ -29,7 +29,8 @@ void drawColors() {
   rotationY += 0.10;
   
   beginShape();
-  fill(255, 0, 0);
+  color red = color(255, 0, 0);
+  fill(red);
   vertex(-125, -125, -125);
   vertex(-125, 125, -125);
   vertex(125, 125, -125);
@@ -37,7 +38,8 @@ void drawColors() {
   endShape();
   
   beginShape();
-  fill(0, 255, 0);
+  color green = color(0,255,0);
+  fill(green);
   vertex(-125, -125, -125);
   vertex(-125, -125, 125);
   vertex(125, -125, 125);
@@ -45,7 +47,8 @@ void drawColors() {
   endShape();
   
   beginShape();
-  fill(0, 0, 255);
+  color blue = color(0,0,255);
+  fill(blue);
   vertex(125, -125, -125);
   vertex(125, -125, 125);
   vertex(125, 125, 125);
@@ -53,7 +56,8 @@ void drawColors() {
   endShape();
   
   beginShape();
-  fill(0, 255, 255);
+  color cyan = color(0,255,255);
+  fill(cyan);
   vertex(125, 125, -125);
   vertex(125, 125, 125);
   vertex(-125, 125, 125);
@@ -61,7 +65,8 @@ void drawColors() {
   endShape();
   
   beginShape();
-  fill(255, 255, 0);
+  color yellow = color(255,255,0);
+  fill(yellow);
   vertex(-125, -125, -125);
   vertex(-125, -125, 125);
   vertex(-125, 125, 125);
@@ -69,7 +74,8 @@ void drawColors() {
   endShape();
   
   beginShape();
-  fill(255, 0, 255);
+  color magenta = color(255,0,255);
+  fill(magenta);
   vertex(-125, -125, 125);
   vertex(-125, 125, 125);
   vertex(125, 125, 125);
