@@ -1,0 +1,7 @@
+5/15:
+- make simple cube with different colors rotate and spin (was an issue because Processing diffuses colors across a shape)
+- implemented Color class to store colors for different faces
+
+5/16:
+- work on UML diagram and internal code structure
+
