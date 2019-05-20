@@ -13,7 +13,7 @@ class Face {
   float angle;
   Orientation face;
   
-  public Face(color faceColor, Orientation face, Colors faceColor) {
+  public Face(Orientation face, Colors faceColor) {
      switch(faceColor) {
        case RED:
          this.faceColor = color(255, 0, 0);
