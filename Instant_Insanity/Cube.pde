@@ -6,6 +6,10 @@ enum Colors {
   RED, BLUE, GREEN, YELLOW 
 }
 
+enum Direction {
+  TURN_LEFT, TURN_RIGHT, TURN_UP, TURN_DOWN  
+}
+
 class Cube {
     Face[] faces;
     float xAngle;
@@ -27,9 +31,16 @@ class Cube {
       xVelocity = 0;
       yVelocity = 0;
       state = "";
+      int counter = 0;
+      for(Orientation faceSide: Orientation.values()) {
+        faces[counter] = new Face(faceSide, Colors.RED);
+      }
     }
     
     void drawNextFrame(){
+      for(Face face: faces) {
+        face.drawNextFrame();
+      }
     }
     
     void updateState(){
@@ -111,10 +122,10 @@ class Cube {
       }
     }
     
-    void nextFrame() {
+    void drawNextFrame() {
       pushMatrix();
-      rotateX(xVelocity);
-      rotateY(yVelocity);
+      rotateX(xAngle);
+      rotateY(yAngle);
       drawFace();
       popMatrix();
     }
