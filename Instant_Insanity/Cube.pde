@@ -1,3 +1,11 @@
+enum Orientation {
+  FRONT_SIDE, BOTTOM_SIDE, RIGHT_SIDE, LEFT_SIDE, REAR_SIDE, TOP_SIDE
+}
+
+enum Colors {
+  RED, BLUE, GREEN, YELLOW 
+}
+
 class Cube {
     Face[] faces;
     float xAngle;
@@ -18,7 +26,7 @@ class Cube {
       yAngle = 0;
       xVelocity = 0;
       yVelocity = 0;
-      state = '';
+      state = "";
     }
     
     void drawNextFrame(){
