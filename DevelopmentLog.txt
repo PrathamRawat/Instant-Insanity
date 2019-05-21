@@ -5,3 +5,7 @@
 5/16:
 - work on UML diagram and internal code structure
 
+5/20:
+- Created base classes
+- Wrote constructors and method headers for Face and Cube Class
+
