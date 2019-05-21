@@ -34,6 +34,7 @@ class Cube {
       int counter = 0;
       for(Orientation faceSide: Orientation.values()) {
         faces[counter] = new Face(faceSide, Colors.RED);
+        counter++;
       }
     }
     
@@ -43,7 +44,12 @@ class Cube {
       }
     }
     
-    void updateState(){
+    void updateState() {
+      
+    }
+    
+    void rotate(Direction turnDirection) {
+      
     }
     
     String getState(){
@@ -120,6 +126,7 @@ class Cube {
         default:
           throw new NullPointerException();
       }
+      endShape();
     }
     
     void drawNextFrame() {
