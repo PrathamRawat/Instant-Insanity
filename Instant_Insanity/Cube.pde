@@ -57,7 +57,7 @@ class Cube {
     }
 
   class Face {
-   
+    
     Face oppositeFace;
     color faceColor;
     float angle;

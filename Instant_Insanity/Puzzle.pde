@@ -1,15 +1,3 @@
-enum Orientation {
-  FRONT_SIDE, BOTTOM_SIDE, RIGHT_SIDE, LEFT_SIDE, REAR_SIDE, TOP_SIDE
-}
-
-enum Colors {
-  RED, BLUE, GREEN, YELLOW 
-}
-
-enum Direction {
-  TURN_LEFT, TURN_RIGHT, TURN_UP, TURN_DOWN  
-}
-
 class Puzzle {
   Cube[] cubes;
   boolean isSolved;
@@ -29,6 +17,7 @@ class Puzzle {
   
   
   GameState saveState(){
+    return gameState;
   }
   
   void solve(){
@@ -38,7 +27,7 @@ class Puzzle {
   }
   
   GameState newPuzzle(){
-    
+    return gameState;
   }
   
   void rot(int cube, int direction){
