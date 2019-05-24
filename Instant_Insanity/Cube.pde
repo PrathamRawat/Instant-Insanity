@@ -10,13 +10,19 @@ enum Direction {
   TURN_LEFT, TURN_RIGHT, TURN_UP, TURN_DOWN  
 }
 
+enum CubeState {
+  DEFAULT, TURNING  
+}
+
 class Cube {
     Face[] faces;
     float xAngle;
     float yAngle;
+    float targetXAngle;
+    float targetYAngle;
     float xVelocity;
     float yVelocity;
-    String state;
+    CubeState state;
     float centerX;
     float centerY;
     float centerZ;
@@ -30,7 +36,7 @@ class Cube {
       yAngle = 0;
       xVelocity = 0;
       yVelocity = 0;
-      state = "";
+      state = CubeState.DEFAULT;
       int counter = 0;
       for(Orientation faceSide: Orientation.values()) {
         faces[counter] = new Face(faceSide, Colors.RED);
@@ -39,20 +45,59 @@ class Cube {
     }
     
     void drawNextFrame(){
+      updateState();
       for(Face face: faces) {
         face.drawNextFrame();
       }
     }
     
     void updateState() {
-      
+      println(state);
+      switch(state) {
+        case TURNING:
+          updateVelocity();
+          xAngle += xVelocity;
+          yAngle += yVelocity;
+          if(Math.abs(xAngle - targetXAngle) < 0.1 || Math.abs(yAngle - targetYAngle) < 0.1) {
+            xAngle = targetXAngle;
+            yAngle = targetYAngle;
+            xVelocity = 0;
+            yVelocity = 0;
+            state = CubeState.DEFAULT;
+          }
+          break;
+        case DEFAULT:
+          break;
+      }
+    }
+    
+    void updateVelocity() {
+      //Sam's magic
     }
     
     void rotate(Direction turnDirection) {
-      
+      state = CubeState.TURNING;
+      switch(turnDirection) {
+        case TURN_UP:
+          targetYAngle = yAngle + radians(90);
+          yVelocity = 0.5;
+          break;
+        case TURN_DOWN:
+          targetYAngle = yAngle - radians(90);
+          yVelocity = -0.5;
+          break;
+        case TURN_RIGHT:
+          targetXAngle = xAngle + radians(90);
+          xVelocity = 0.5;
+          break;
+        case TURN_LEFT:
+          targetXAngle = xAngle - radians(90);
+          xVelocity = -0.5;
+          break;
+      }
     }
     
-    String getState(){
+    CubeState getState(){
       return state;
     }
 
