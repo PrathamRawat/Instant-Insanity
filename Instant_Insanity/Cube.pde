@@ -7,7 +7,7 @@ enum Colors {
 }
 
 enum Direction {
-  TURN_LEFT, TURN_RIGHT, TURN_UP, TURN_DOWN  
+  TURN_LEFT, TURN_RIGHT, TURN_UP, TURN_DOWN, NONE
 }
 
 enum CubeState {
@@ -20,12 +20,15 @@ class Cube {
     float yAngle;
     float targetXAngle;
     float targetYAngle;
-    float xVelocity;
-    float yVelocity;
+    double xVelocity;
+    double yVelocity;
     CubeState state;
+    Direction turnDirection;
     float centerX;
     float centerY;
     float centerZ;
+    long timeStartTurning;
+    final float ROT_TIME;
     
     public Cube(float x, float y, float z){
       centerX = x;
@@ -42,6 +45,7 @@ class Cube {
         faces[counter] = new Face(faceSide, Colors.RED);
         counter++;
       }
+      ROT_TIME = 5.0;
     }
     
     void drawNextFrame(){
@@ -52,18 +56,22 @@ class Cube {
     }
     
     void updateState() {
-      println(state);
+      //println(state);
       switch(state) {
         case TURNING:
           updateVelocity();
           xAngle += xVelocity;
           yAngle += yVelocity;
-          if(Math.abs(xAngle - targetXAngle) < 0.1 && Math.abs(yAngle - targetYAngle) < 0.1) {
+          println(yVelocity);
+          double curtime = (System.currentTimeMillis() - timeStartTurning) / 1000.0;
+          //if(Math.abs(xAngle - targetXAngle) < 0.1 && Math.abs(yAngle - targetYAngle) < 0.1) {
+          if(curtime >= ROT_TIME) {
             xAngle = targetXAngle;
             yAngle = targetYAngle;
             xVelocity = 0;
             yVelocity = 0;
             state = CubeState.DEFAULT;
+            turnDirection = Direction.NONE;
           }
           break;
         case DEFAULT:
@@ -72,28 +80,47 @@ class Cube {
     }
     
     void updateVelocity() {
-      //Sam's magic
-    }
-    
-    void rotate(Direction turnDirection) {
-      state = CubeState.TURNING;
+      double curtime = (System.currentTimeMillis() - timeStartTurning) / 1000.0;
+      //println("Time: " + curtime); 
       switch(turnDirection) {
         case TURN_UP:
-          targetYAngle = yAngle + radians(90);
-          yVelocity = 0.5;
+          xVelocity = (Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime);
           break;
         case TURN_DOWN:
-          targetYAngle = yAngle - radians(90);
-          yVelocity = -0.5;
+          xVelocity = -(Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime);
           break;
         case TURN_RIGHT:
-          targetXAngle = xAngle + radians(90);
-          xVelocity = 0.5;
+          yVelocity = (Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime);
           break;
         case TURN_LEFT:
-          targetXAngle = xAngle - radians(90);
-          xVelocity = -0.5;
+          yVelocity = -(Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime);
           break;
+        case NONE:
+          break;
+      }
+    }
+      
+    void rotate(Direction turnDirection) {
+      if(state != CubeState.TURNING) {
+        this.turnDirection = turnDirection;
+        timeStartTurning = System.currentTimeMillis();
+        state = CubeState.TURNING;
+        switch(turnDirection) {
+          case TURN_RIGHT:
+            targetYAngle = yAngle - radians(90);
+            break;
+          case TURN_LEFT:
+            targetYAngle = yAngle + radians(90);
+            break;
+          case TURN_UP:
+            targetXAngle = xAngle - radians(90);
+            break;
+          case TURN_DOWN:
+            targetXAngle = xAngle + radians(90);
+            break;
+          case NONE:
+            break;
+        }
       }
     }
     
