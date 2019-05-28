@@ -58,7 +58,7 @@ class Cube {
           updateVelocity();
           xAngle += xVelocity;
           yAngle += yVelocity;
-          if(Math.abs(xAngle - targetXAngle) < 0.1 || Math.abs(yAngle - targetYAngle) < 0.1) {
+          if(Math.abs(xAngle - targetXAngle) < 0.1 && Math.abs(yAngle - targetYAngle) < 0.1) {
             xAngle = targetXAngle;
             yAngle = targetYAngle;
             xVelocity = 0;
@@ -128,7 +128,6 @@ class Cube {
     }
     
     void drawFace() {
-      translate(centerX, centerY, centerZ);
       fill(faceColor);
       beginShape();
       switch(face) {
@@ -176,6 +175,7 @@ class Cube {
     
     void drawNextFrame() {
       pushMatrix();
+      translate(centerX, centerY, centerZ);
       rotateX(xAngle);
       rotateY(yAngle);
       drawFace();
