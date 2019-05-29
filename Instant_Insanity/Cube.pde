@@ -37,14 +37,15 @@ class Cube {
       centerY = y;
       centerZ = z;
       faces = new Face[6];
+      yAngle = (float)Math.PI / 4.0;
       xAngle = 0;
-      yAngle = 0;
       xVelocity = 0;
       yVelocity = 0;
       state = CubeState.DEFAULT;
       int counter = 0;
       for(Orientation faceSide: Orientation.values()) {
-        faces[counter] = new Face(faceSide, Colors.RED);
+        Colors faceColor = Colors.values()[(int)random(4)];
+        faces[counter] = new Face(faceSide, faceColor);
         counter++;
       }
       ROT_TIME = 5.0;
@@ -134,7 +135,6 @@ class Cube {
     
     Face oppositeFace;
     color faceColor;
-    float angle;
     Orientation face;
     
     public Face(Orientation face, Colors faceColor) {
@@ -152,7 +152,6 @@ class Cube {
            this.faceColor = color(255, 0, 255);
            break;
        }
-       angle = 0;
        this.face = face;
     }
     

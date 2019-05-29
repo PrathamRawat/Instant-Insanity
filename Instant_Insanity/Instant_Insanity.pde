@@ -7,7 +7,8 @@ void setup() {
 }
 
 void draw() {
-  background(255);
+  background(0);
+  noStroke();
   puzzle.updatePuzzleFrame();
   puzzle.displayPuzzleFrame();
   //cube.drawNextFrame();
