@@ -7,12 +7,20 @@ class Puzzle {
   public Puzzle(){
     isSolved = false;
     cubes = new Cube[4];
+    cubes[0] = new Cube(displayWidth / 2.0, 1.0 * displayHeight / 5, 0.0, 50.0);
+    cubes[1] = new Cube(displayWidth / 2, 2 * displayHeight / 5, 0, 50);
+    cubes[2] = new Cube(displayWidth / 2, 3 * displayHeight / 5, 0, 50);
+    cubes[3] = new Cube(displayWidth / 2, 4 * displayHeight / 5, 0, 50);
     gameStates = new ArrayList<GameState>();
     gameState = new GameState();
   }
   
   void puzzle(String state){
-    
+    cubes = new Cube[4];
+    //cubes[0] = new Cube(displayWidth / 2, 1 * displayHeight / 5, 0);
+    //cubes[1] = new Cube(displayWidth / 2, 2 * displayHeight / 5, 0);
+    //cubes[2] = new Cube(displayWidth / 2, 3 * displayHeight / 5, 0);
+    //cubes[3] = new Cube(displayWidth / 2, 4 * displayHeight / 5, 0);
   }
   
   
@@ -26,6 +34,18 @@ class Puzzle {
   void scramble(){
   }
   
+  void updatePuzzleFrame() {
+    for(Cube cube: cubes) {
+       cube.updateState();
+    }
+  }
+  
+  void displayPuzzleFrame() {
+    for(Cube cube: cubes) {
+       cube.drawNextFrame();
+    }
+  }
+  
   GameState newPuzzle(){
     return gameState;
   }
@@ -35,136 +55,7 @@ class Puzzle {
   
   void loadState(){
   }
-    
-class Cube {
-    Face[] faces;
-    float xAngle;
-    float yAngle;
-    float xVelocity;
-    float yVelocity;
-    String state;
-    float centerX;
-    float centerY;
-    float centerZ;
-    
-    public Cube(float x, float y, float z){
-      centerX = x;
-      centerY = y;
-      centerZ = z;
-      faces = new Face[6];
-      xAngle = 0;
-      yAngle = 0;
-      xVelocity = 0;
-      yVelocity = 0;
-      state = "";
-      int counter = 0;
-      for(Orientation faceSide: Orientation.values()) {
-        faces[counter] = new Face(faceSide, Colors.RED);
-        counter++;
-      }
-    }
-    
-    void drawNextFrame(){
-      for(Face face: faces) {
-        face.drawNextFrame();
-      }
-    }
-    
-    void updateState() {
-      
-    }
-    
-    void rotate(Direction turnDirection) {
-      
-    }
-    
-    String getState(){
-      return state;
-    }
-
-  class Face {
-   
-    Face oppositeFace;
-    color faceColor;
-    float angle;
-    Orientation face;
-    
-    public Face(Orientation face, Colors faceColor) {
-       switch(faceColor) {
-         case RED:
-           this.faceColor = color(255, 0, 0);
-           break;
-         case BLUE:
-           this.faceColor = color(0, 0, 255);
-           break;
-         case GREEN:
-           this.faceColor = color(0, 255, 0);
-           break;
-         case YELLOW:
-           this.faceColor = color(255, 0, 255);
-           break;
-       }
-       angle = 0;
-       this.face = face;
-    }
-    
-    void drawFace() {
-      translate(centerX, centerY, centerZ);
-      fill(faceColor);
-      beginShape();
-      switch(face) {
-        case FRONT_SIDE:
-            vertex(-125, -125, -125);
-            vertex(-125, 125, -125);
-            vertex(125, 125, -125);
-            vertex(125, -125, -125);
-          break;
-        case REAR_SIDE:
-          vertex(-125, -125, 125);
-          vertex(-125, 125, 125);
-          vertex(125, 125, 125);
-          vertex(125, -125, 125);
-          break;
-        case LEFT_SIDE:
-          vertex(-125, -125, -125);
-          vertex(-125, -125, 125);
-          vertex(-125, 125, 125);
-          vertex(-125, 125, -125);
-          break;
-        case RIGHT_SIDE:
-          vertex(125, -125, -125);
-          vertex(125, -125, 125);
-          vertex(125, 125, 125);
-          vertex(125, 125, -125);
-          break;
-        case TOP_SIDE:
-          vertex(-125, -125, -125);
-          vertex(-125, -125, 125);
-          vertex(125, -125, 125);
-          vertex(125, -125, -125);
-          break;
-        case BOTTOM_SIDE:
-          vertex(125, 125, -125);
-          vertex(125, 125, 125);
-          vertex(-125, 125, 125);
-          vertex(-125, 125, -125);
-          break;
-        default:
-          throw new NullPointerException();
-      }
-      endShape();
-    }
-    
-    void drawNextFrame() {
-      pushMatrix();
-      rotateX(xAngle);
-      rotateY(yAngle);
-      drawFace();
-      popMatrix();
-    }
-    
-  }
-}
+  
   class GameState{
     String state;
     public GameState(){

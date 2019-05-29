@@ -27,10 +27,12 @@ class Cube {
     float centerX;
     float centerY;
     float centerZ;
+    float size;
     long timeStartTurning;
     final float ROT_TIME;
     
-    public Cube(float x, float y, float z){
+    Cube(float x, float y, float z, float size) {
+      this.size = size;
       centerX = x;
       centerY = y;
       centerZ = z;
@@ -159,40 +161,40 @@ class Cube {
       beginShape();
       switch(face) {
         case FRONT_SIDE:
-            vertex(-125, -125, -125);
-            vertex(-125, 125, -125);
-            vertex(125, 125, -125);
-            vertex(125, -125, -125);
+            vertex(-size, -size, -size);
+            vertex(-size, size, -size);
+            vertex(size, size, -size);
+            vertex(size, -size, -size);
           break;
         case REAR_SIDE:
-          vertex(-125, -125, 125);
-          vertex(-125, 125, 125);
-          vertex(125, 125, 125);
-          vertex(125, -125, 125);
+          vertex(-size, -size, size);
+          vertex(-size, size, size);
+          vertex(size, size, size);
+          vertex(size, -size, size);
           break;
         case LEFT_SIDE:
-          vertex(-125, -125, -125);
-          vertex(-125, -125, 125);
-          vertex(-125, 125, 125);
-          vertex(-125, 125, -125);
+          vertex(-size, -size, -size);
+          vertex(-size, -size, size);
+          vertex(-size, size, size);
+          vertex(-size, size, -size);
           break;
         case RIGHT_SIDE:
-          vertex(125, -125, -125);
-          vertex(125, -125, 125);
-          vertex(125, 125, 125);
-          vertex(125, 125, -125);
+          vertex(size, -size, -size);
+          vertex(size, -size, size);
+          vertex(size, size, size);
+          vertex(size, size, -size);
           break;
         case TOP_SIDE:
-          vertex(-125, -125, -125);
-          vertex(-125, -125, 125);
-          vertex(125, -125, 125);
-          vertex(125, -125, -125);
+          vertex(-size, -size, -size);
+          vertex(-size, -size, size);
+          vertex(size, -size, size);
+          vertex(size, -size, -size);
           break;
         case BOTTOM_SIDE:
-          vertex(125, 125, -125);
-          vertex(125, 125, 125);
-          vertex(-125, 125, 125);
-          vertex(-125, 125, -125);
+          vertex(size, size, -size);
+          vertex(size, size, size);
+          vertex(-size, size, size);
+          vertex(-size, size, -size);
           break;
         default:
           throw new NullPointerException();
