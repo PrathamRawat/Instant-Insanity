@@ -8,23 +8,29 @@ void setup() {
 
 void draw() {
   background(0);
-  noStroke();
+  //noStroke();
   puzzle.updatePuzzleFrame();
   puzzle.displayPuzzleFrame();
   //cube.drawNextFrame();
 }
 
 void keyPressed() {
+  if(key == 'o') {
+    puzzle.moveSelectorUp();
+  }
+  if(key == 'l') {
+    puzzle.moveSelectorDown();
+  }
   if(key == 'a') {
-    //cube.rotate(Direction.TURN_LEFT);
-  }
-  if(key == 's') {
-    //cube.rotate(Direction.TURN_DOWN);
-  }
-  if(key == 'd') {
-    //cube.rotate(Direction.TURN_RIGHT);
+    puzzle.turnLeft();
   }
   if(key == 'w') {
-    //cube.rotate(Direction.TURN_UP);
+    puzzle.turnUp();
+  }
+  if(key == 's') {
+    puzzle.turnDown();
+  }
+  if(key == 'd') {
+    puzzle.turnRight();
   }
 }

@@ -41,6 +41,8 @@ class Cube {
       xAngle = 0;
       xVelocity = 0;
       yVelocity = 0;
+      targetXAngle = 0;
+      targetYAngle = (float)Math.PI / 4;
       state = CubeState.DEFAULT;
       int counter = 0;
       for(Orientation faceSide: Orientation.values()) {
@@ -204,8 +206,8 @@ class Cube {
     void drawNextFrame() {
       pushMatrix();
       translate(centerX, centerY, centerZ);
-      rotateX(xAngle);
       rotateY(yAngle);
+      rotateX(xAngle);
       drawFace();
       popMatrix();
     }

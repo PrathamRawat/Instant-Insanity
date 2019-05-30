@@ -1,5 +1,6 @@
 class Puzzle {
   Cube[] cubes;
+  int selectedCube;
   boolean isSolved;
   GameState gameState;
   ArrayList<GameState> gameStates;
@@ -11,6 +12,8 @@ class Puzzle {
     cubes[1] = new Cube(displayWidth / 2, 2 * displayHeight / 5, 0, 50);
     cubes[2] = new Cube(displayWidth / 2, 3 * displayHeight / 5, 0, 50);
     cubes[3] = new Cube(displayWidth / 2, 4 * displayHeight / 5, 0, 50);
+    selectedCube = 0;
+    
     gameStates = new ArrayList<GameState>();
     gameState = new GameState();
   }
@@ -23,6 +26,29 @@ class Puzzle {
     //cubes[3] = new Cube(displayWidth / 2, 4 * displayHeight / 5, 0);
   }
   
+  void moveSelectorUp() {
+     if(selectedCube != 0) selectedCube--; 
+  }
+
+  void moveSelectorDown() {
+     if(selectedCube != 3) selectedCube++; 
+  }
+  
+  void turnUp() {
+    cubes[selectedCube].rotate(Direction.TURN_UP);  
+  }
+  
+  void turnDown() {
+    cubes[selectedCube].rotate(Direction.TURN_DOWN);  
+  }
+  
+  void turnLeft() {
+    cubes[selectedCube].rotate(Direction.TURN_LEFT);  
+  }
+  
+  void turnRight() {
+    cubes[selectedCube].rotate(Direction.TURN_RIGHT);  
+  }
   
   GameState saveState(){
     return gameState;
