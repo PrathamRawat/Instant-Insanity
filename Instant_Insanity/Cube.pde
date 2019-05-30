@@ -50,7 +50,7 @@ class Cube {
         faces[counter] = new Face(faceSide, faceColor);
         counter++;
       }
-      ROT_TIME = 5.0;
+      ROT_TIME = 0.25;
     }
     
     void drawNextFrame(){
@@ -69,6 +69,7 @@ class Cube {
           yAngle += yVelocity;
           println(yVelocity);
           double curtime = (System.currentTimeMillis() - timeStartTurning) / 1000.0;
+          println(curtime);
           //if(Math.abs(xAngle - targetXAngle) < 0.1 && Math.abs(yAngle - targetYAngle) < 0.1) {
           if(curtime >= ROT_TIME) {
             xAngle = targetXAngle;
@@ -89,16 +90,16 @@ class Cube {
       //println("Time: " + curtime); 
       switch(turnDirection) {
         case TURN_UP:
-          xVelocity = (Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime);
+          xVelocity = (Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime) / 120;
           break;
         case TURN_DOWN:
-          xVelocity = -(Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime);
+          xVelocity = -(Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime) / 120;
           break;
         case TURN_RIGHT:
-          yVelocity = (Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime);
+          yVelocity = (Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime) / 120;
           break;
         case TURN_LEFT:
-          yVelocity = -(Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime);
+          yVelocity = -(Math.PI / 2) * (6 / Math.pow(ROT_TIME,3)) * curtime * (ROT_TIME - curtime) / 120;
           break;
         case NONE:
           break;
@@ -112,16 +113,16 @@ class Cube {
         state = CubeState.TURNING;
         switch(turnDirection) {
           case TURN_RIGHT:
-            targetYAngle = yAngle - radians(90);
-            break;
-          case TURN_LEFT:
             targetYAngle = yAngle + radians(90);
             break;
+          case TURN_LEFT:
+            targetYAngle = yAngle - radians(90);
+            break;
           case TURN_UP:
-            targetXAngle = xAngle - radians(90);
+            targetXAngle = xAngle + radians(90);
             break;
           case TURN_DOWN:
-            targetXAngle = xAngle + radians(90);
+            targetXAngle = xAngle - radians(90);
             break;
           case NONE:
             break;
