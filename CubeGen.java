@@ -14,7 +14,9 @@ class CubeGen{
   public static String[][] cubeSet(String[][] tower){//returns in the form {top, left, front, right, bottom, back}
     String[][] cubes = new String[4][6];
     String[][] tow = newPuzzle();
+    int topface = (int)(6 * Math.random());
     for(int i = 0; i < 4; i++){
+      if(topface == 0){
       String[] topandbot = topBot(tow[i]);
       cubes[i][0] = topandbot[0];
       cubes[i][1] = tow[i][0];
@@ -22,6 +24,52 @@ class CubeGen{
       cubes[i][3] = tow[i][2];
       cubes[i][4] = topandbot[1];
       cubes[i][5] = tow[i][3];
+    }
+      if(topface == 1){
+      String[] topandbot = topBot(tow[i]);
+      cubes[i][0] = tow[i][0];
+      cubes[i][1] = topandbot[1];
+      cubes[i][2] = tow[i][1];
+      cubes[i][3] = topandbot[0];
+      cubes[i][4] = tow[i][2];
+      cubes[i][5] = tow[i][3];
+    }
+      if(topface == 2){
+      String[] topandbot = topBot(tow[i]);
+      cubes[i][0] = tow[i][1];
+      cubes[i][1] = tow[i][0];
+      cubes[i][2] = topandbot[1];
+      cubes[i][3] = tow[i][2];
+      cubes[i][4] = tow[i][3];
+      cubes[i][5] = topandbot[0];
+    }
+      if(topface == 3){
+      String[] topandbot = topBot(tow[i]);
+      cubes[i][0] = tow[i][2];
+      cubes[i][1] = topandbot[0];
+      cubes[i][2] = tow[i][1];
+      cubes[i][3] = topandbot[1];
+      cubes[i][4] = tow[i][0];
+      cubes[i][5] = tow[i][3];
+    }
+      if(topface == 4){
+      String[] topandbot = topBot(tow[i]);
+      cubes[i][0] = topandbot[1];
+      cubes[i][1] = tow[i][0];
+      cubes[i][2] = tow[i][3];
+      cubes[i][3] = tow[i][2];
+      cubes[i][4] = topandbot[0];
+      cubes[i][5] = tow[i][1];
+    }
+      if(topface == 5){
+      String[] topandbot = topBot(tow[i]);
+      cubes[i][0] = tow[i][3];
+      cubes[i][1] = tow[i][0];
+      cubes[i][2] = topandbot[0];
+      cubes[i][3] = tow[i][2];
+      cubes[i][4] = tow[i][1];
+      cubes[i][5] = topandbot[1];
+    }
     }
     return cubes;
   }
@@ -42,6 +90,14 @@ class CubeGen{
     }
     if(isBad(sides)){
       return newPuzzle();
+    }
+    for(int k = 0; k < 4; k++){
+      int rot = (int) (4 * Math.random());
+      for(int l = 0; l < 4; l++){
+        String temp = sides[k][(l + rot) % 4];
+        sides[k][(l + rot) % 4] = sides[k][l];
+        sides[k][l] = temp;
+      }
     }
     return sides;
   }
@@ -146,17 +202,14 @@ class Graph{
     public void addNode(Node num){
       connections.add(num);
     }
-
-  }
-  
-}
-
-  public int coltonum(String col){
+    public int coltonum(String col){
     if(col == "r") return 0;
     if(col == "b") return 1;
     if(col == "g") return 2;
     if(col == "y") return 3;
     return -1;
+  }
+
   }
 
 }
