@@ -50,7 +50,7 @@ class Cube {
         faces[counter] = new Face(faceSide, faceColor);
         counter++;
       }
-      ROT_TIME = 5.0;
+      ROT_TIME = 0.01;
     }
     
     void drawNextFrame(){
@@ -112,16 +112,16 @@ class Cube {
         state = CubeState.TURNING;
         switch(turnDirection) {
           case TURN_RIGHT:
-            targetYAngle = yAngle - radians(90);
-            break;
-          case TURN_LEFT:
             targetYAngle = yAngle + radians(90);
             break;
+          case TURN_LEFT:
+            targetYAngle = yAngle - radians(90);
+            break;
           case TURN_UP:
-            targetXAngle = xAngle - radians(90);
+            targetXAngle = xAngle + radians(90);
             break;
           case TURN_DOWN:
-            targetXAngle = xAngle + radians(90);
+            targetXAngle = xAngle - radians(90);
             break;
           case NONE:
             break;
