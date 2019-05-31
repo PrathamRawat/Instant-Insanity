@@ -8,7 +8,7 @@ class Puzzle {
   public Puzzle(){
     isSolved = false;
     cubes = new Cube[4];
-    cubes[0] = new Cube(displayWidth / 2.0, 1.0 * displayHeight / 5, 0.0, 50.0);
+    cubes[0] = new Cube(displayWidth / 2, 1 * displayHeight / 5, 0, 50);
     cubes[1] = new Cube(displayWidth / 2, 2 * displayHeight / 5, 0, 50);
     cubes[2] = new Cube(displayWidth / 2, 3 * displayHeight / 5, 0, 50);
     cubes[3] = new Cube(displayWidth / 2, 4 * displayHeight / 5, 0, 50);
