@@ -15,10 +15,10 @@ void draw() {
 }
 
 void keyPressed() {
-  if(key == 'o') {
+  if(key == 'j') {
     puzzle.moveSelectorUp();
   }
-  if(key == 'l') {
+  if(key == 'k') {
     puzzle.moveSelectorDown();
   }
   if(key == 'a') {
