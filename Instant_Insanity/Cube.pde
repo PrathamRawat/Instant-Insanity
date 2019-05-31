@@ -38,8 +38,8 @@ class Cube {
       centerY = y;
       centerZ = z;
       faces = new Face[6];
-      yAngle = (float)Math.PI / 4.0;
-      xAngle = 0;
+      yAngle = 0;
+      xAngle = (float)Math.PI / 4.0;
       xVelocity = 0;
       yVelocity = 0;
       targetXAngle = 0;
@@ -172,8 +172,8 @@ class Cube {
         faces[3].face = Orientation.RIGHT_SIDE;
         faces[4].face = Orientation.BOTTOM_SIDE;
         faces[5].face = Orientation.REAR_SIDE;
-        yAngle = (float)Math.PI / 4.0;
-        xAngle = 0;
+        yAngle = 0;
+        xAngle = (float)Math.PI / 4.0;
     }
     
     CubeState getState(){
@@ -256,8 +256,8 @@ class Cube {
       pushMatrix();
       translate(centerX, centerY, centerZ);
       //if(owner.turnDirection == Direction.TURN_UP || owner.turnDirection == Direction.TURN_DOWN)
-      rotateY(yAngle);
       rotateX(xAngle);
+      rotateY(yAngle);
       drawFace();
       popMatrix();
     }
