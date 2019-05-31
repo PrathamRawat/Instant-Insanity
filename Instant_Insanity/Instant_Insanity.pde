@@ -7,7 +7,7 @@ void setup() {
 }
 
 void draw() {
-  background(0);
+  background(180);
   //noStroke();
   puzzle.updatePuzzleFrame();
   puzzle.displayPuzzleFrame();
@@ -16,10 +16,10 @@ void draw() {
 
 void keyPressed() {
   if(key == 'o') {
-    puzzle.moveSelectorUp();
+    puzzle.moveSelectorLeft();
   }
   if(key == 'l') {
-    puzzle.moveSelectorDown();
+    puzzle.moveSelectorRight();
   }
   if(key == 'a') {
     puzzle.turnLeft();

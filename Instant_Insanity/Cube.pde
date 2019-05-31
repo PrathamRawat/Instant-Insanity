@@ -1,5 +1,6 @@
 enum Orientation {
-  FRONT_SIDE, BOTTOM_SIDE, RIGHT_SIDE, LEFT_SIDE, REAR_SIDE, TOP_SIDE
+  //FRONT_SIDE, BOTTOM_SIDE, RIGHT_SIDE, LEFT_SIDE, REAR_SIDE, TOP_SIDE
+  TOP_SIDE, LEFT_SIDE, FRONT_SIDE, RIGHT_SIDE, BOTTOM_SIDE, REAR_SIDE
 }
 
 enum Colors {
@@ -30,6 +31,7 @@ class Cube {
     float size;
     long timeStartTurning;
     final float ROT_TIME;
+    boolean isSelected;
     
     Cube(float x, float y, float z, float size) {
       this.size = size;
@@ -37,8 +39,8 @@ class Cube {
       centerY = y;
       centerZ = z;
       faces = new Face[6];
-      yAngle = (float)Math.PI / 4.0;
-      xAngle = 0;
+      yAngle = 0;
+      xAngle = (float)Math.PI / 4.0;
       xVelocity = 0;
       yVelocity = 0;
       targetXAngle = 0;
@@ -47,10 +49,11 @@ class Cube {
       int counter = 0;
       for(Orientation faceSide: Orientation.values()) {
         Colors faceColor = Colors.values()[(int)random(4)];
-        faces[counter] = new Face(faceSide, faceColor);
+        faces[counter] = new Face(faceSide, faceColor, this);
         counter++;
       }
       ROT_TIME = 0.25;
+      isSelected = false;
     }
     
     void drawNextFrame(){
@@ -77,12 +80,19 @@ class Cube {
             xVelocity = 0;
             yVelocity = 0;
             state = CubeState.DEFAULT;
+            updateArray(turnDirection);
             turnDirection = Direction.NONE;
           }
           break;
         case DEFAULT:
           break;
       }
+    }
+    
+    void select(){
+      isSelected = ! isSelected;
+      if(isSelected) scale(1.1);
+      if(! isSelected) scale(1/1.1);
     }
     
     void updateVelocity() {
@@ -130,6 +140,50 @@ class Cube {
       }
     }
     
+    void updateArray(Direction turnDirection) {
+      Face temp;
+      switch(turnDirection) {
+          case TURN_LEFT:
+            temp = faces[5];
+            faces[5] = faces[3];
+            faces[3] = faces[2];
+            faces[2] = faces[1];
+            faces[1] = temp;
+            break;
+          case TURN_RIGHT:
+            temp = faces[5];
+            faces[5] = faces[1];
+            faces[1] = faces[2];
+            faces[2] = faces[3];
+            faces[3] = temp;
+            break;
+          case TURN_DOWN:
+            temp = faces[5];
+            faces[5] = faces[0];
+            faces[0] = faces[2];
+            faces[2] = faces[4];
+            faces[4] = temp;
+            break;
+          case TURN_UP:
+            temp = faces[5];
+            faces[5] = faces[4];
+            faces[4] = faces[2];
+            faces[2] = faces[0];
+            faces[0] = temp;
+            break;
+          case NONE:
+            break;
+        }
+        faces[0].face = Orientation.TOP_SIDE;
+        faces[1].face = Orientation.LEFT_SIDE;
+        faces[2].face = Orientation.FRONT_SIDE;
+        faces[3].face = Orientation.RIGHT_SIDE;
+        faces[4].face = Orientation.BOTTOM_SIDE;
+        faces[5].face = Orientation.REAR_SIDE;
+        yAngle = 0;
+        xAngle = (float)Math.PI / 4.0;
+    }
+    
     CubeState getState(){
       return state;
     }
@@ -139,8 +193,10 @@ class Cube {
     Face oppositeFace;
     color faceColor;
     Orientation face;
+    Cube owner;
     
-    public Face(Orientation face, Colors faceColor) {
+    public Face(Orientation face, Colors faceColor, Cube owner) {
+      this.owner = owner;
        switch(faceColor) {
          case RED:
            this.faceColor = color(255, 0, 0);
@@ -207,8 +263,9 @@ class Cube {
     void drawNextFrame() {
       pushMatrix();
       translate(centerX, centerY, centerZ);
-      rotateY(yAngle);
+      //if(owner.turnDirection == Direction.TURN_UP || owner.turnDirection == Direction.TURN_DOWN)
       rotateX(xAngle);
+      rotateY(yAngle);
       drawFace();
       popMatrix();
     }

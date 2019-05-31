@@ -8,11 +8,12 @@ class Puzzle {
   public Puzzle(){
     isSolved = false;
     cubes = new Cube[4];
-    cubes[0] = new Cube(displayWidth / 2.0, 1.0 * displayHeight / 5, 0.0, 50.0);
-    cubes[1] = new Cube(displayWidth / 2, 2 * displayHeight / 5, 0, 50);
-    cubes[2] = new Cube(displayWidth / 2, 3 * displayHeight / 5, 0, 50);
-    cubes[3] = new Cube(displayWidth / 2, 4 * displayHeight / 5, 0, 50);
+    cubes[0] = new Cube(1 * displayWidth / 5, displayHeight / 2, 0, displayWidth / 15);
+    cubes[1] = new Cube(2 * displayWidth / 5, displayHeight / 2, 0, displayWidth / 15);
+    cubes[2] = new Cube(3 * displayWidth / 5, displayHeight / 2, 0, displayWidth / 15);
+    cubes[3] = new Cube(4 * displayWidth / 5, displayHeight / 2, 0, displayWidth / 15);
     selectedCube = 0;
+    cubes[0].select();
     
     gameStates = new ArrayList<GameState>();
     gameState = new GameState();
@@ -26,12 +27,20 @@ class Puzzle {
     //cubes[3] = new Cube(displayWidth / 2, 4 * displayHeight / 5, 0);
   }
   
-  void moveSelectorUp() {
-     if(selectedCube != 0) selectedCube--; 
+  void moveSelectorLeft() {
+     if(selectedCube != 0){ 
+       cubes[selectedCube].select();
+       selectedCube--; 
+       cubes[selectedCube].select();
+     }
   }
 
-  void moveSelectorDown() {
-     if(selectedCube != 3) selectedCube++; 
+  void moveSelectorRight() {
+     if(selectedCube != 3){ 
+       cubes[selectedCube].select();
+       selectedCube++; 
+       cubes[selectedCube].select();
+     }
   }
   
   void turnUp() {
