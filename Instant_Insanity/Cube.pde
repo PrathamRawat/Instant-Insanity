@@ -91,8 +91,6 @@ class Cube {
     
     void select(){
       isSelected = ! isSelected;
-      if(isSelected) scale(1.1);
-      if(! isSelected) scale(1/1.1);
     }
     
     void updateVelocity() {
@@ -262,6 +260,10 @@ class Cube {
     
     void drawNextFrame() {
       pushMatrix();
+      if(isSelected){ 
+        scale(1.1);
+        translate(-40,-40,-40);
+      }
       translate(centerX, centerY, centerZ);
       //if(owner.turnDirection == Direction.TURN_UP || owner.turnDirection == Direction.TURN_DOWN)
       rotateX(xAngle);
