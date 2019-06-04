@@ -254,17 +254,17 @@ class CubeGen{
     int numred = 0;
     int numblue = 0;
     int numgreen = 0;
-    int numyel = 0;
+    int nummag = 0;
     for(int i = 0; i < 4; i++){
       if(cube[i] == Colors.RED) numred++;
       if(cube[i] == Colors.BLUE) numblue++;
       if(cube[i] == Colors.GREEN) numgreen++;
-      if(cube[i] == Colors.MAGENTA) numyel++;
+      if(cube[i] == Colors.MAGENTA) nummag++;
     }
     if(numred == 0) numDif--;
     if(numblue == 0) numDif--;
     if(numgreen == 0) numDif--;
-    if(numyel == 0) numDif--;
+    if(nummag == 0) numDif--;
     ArrayList<Colors> options = new ArrayList<Colors>();
     Colors[] topandbot = new Colors[2];
     if(numDif == 4){
@@ -286,7 +286,7 @@ class CubeGen{
       if(numgreen == 0){
         topandbot[0] = Colors.GREEN;
       }
-      if(numyel == 0){
+      if(nummag == 0){
         topandbot[0] = Colors.MAGENTA;
       }
       options.add(Colors.RED);
@@ -305,7 +305,7 @@ class CubeGen{
       if(numgreen == 0){
         options.add(Colors.GREEN);
       }
-      if(numyel == 0){
+      if(nummag == 0){
         options.add(Colors.MAGENTA);
       }
       for(int j = 0; j < 2; j++){
@@ -320,15 +320,15 @@ class CubeGen{
       int numred = 0;
       int numblue = 0;
       int numgreen = 0;
-      int numyel = 0;
+      int nummag = 0;
       for(int c = 0; c < 4; c++){
         if(sides[r][c] == Colors.RED) numred++;
         if(sides[r][c] == Colors.BLUE) numblue++;
         if(sides[r][c] == Colors.GREEN) numgreen++;
-        if(sides[r][c] == Colors.MAGENTA) numyel++;
+        if(sides[r][c] == Colors.MAGENTA) nummag++;
       }
-       //System.out.println(numred + " " + numblue + " " + numgreen + " " + numyel);
-      if(numred == 4 || numblue == 4 || numgreen == 4 || numyel == 4) return true;
+       //System.out.println(numred + " " + numblue + " " + numgreen + " " + nummag);
+      if(numred == 4 || numblue == 4 || numgreen == 4 || nummag == 4) return true;
     }
     return false;
   }
