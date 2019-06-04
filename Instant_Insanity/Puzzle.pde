@@ -119,7 +119,7 @@ class Puzzle {
           case BOTTOM_SIDE:
             cubes[cubenum].faces[4].faceColor = myState.state[cubenum][4];
             break;
-          case BACK_SIDE:
+          case REAR_SIDE:
             cubes[cubenum].faces[5].faceColor = myState.state[cubenum][5];
             break;
         }
