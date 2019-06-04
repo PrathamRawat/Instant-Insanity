@@ -18,7 +18,7 @@ void keyPressed() {
   if(key == 'j') {
     puzzle.moveSelectorLeft();
   }
-  if(key == 'k') {
+  if(key == 'l') {
     puzzle.moveSelectorRight();
   }
   if(key == 'a') {
@@ -32,5 +32,11 @@ void keyPressed() {
   }
   if(key == 'd') {
     puzzle.turnRight();
+  }
+  if(key == 'i') {
+    puzzle.turnAllUp();
+  }
+  if(key == 'k') {
+    puzzle.turnAllDown();
   }
 }

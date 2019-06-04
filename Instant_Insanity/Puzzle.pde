@@ -47,6 +47,18 @@ class Puzzle {
     cubes[selectedCube].rotate(Direction.TURN_UP);  
   }
   
+  void turnAllUp() {
+    for(Cube cube: cubes) {
+      cube.rotate(Direction.TURN_UP);
+    }
+  }
+  
+  void turnAllDown() {
+    for(Cube cube: cubes) {
+      cube.rotate(Direction.TURN_DOWN);
+    }
+  }
+  
   void turnDown() {
     cubes[selectedCube].rotate(Direction.TURN_DOWN);  
   }
