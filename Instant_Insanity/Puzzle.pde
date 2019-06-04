@@ -17,6 +17,7 @@ class Puzzle {
     
     gameStates = new ArrayList<GameState>();
     gameState = new GameState();
+    gameState.updateState(cubeSet(newPuz()));
   }
   
   void puzzle(String state){
@@ -144,7 +145,7 @@ class Puzzle {
       return result;
     }
     
-    void updateState(GameState newState){
+    void updateState(Colors[][] newState){
       state = newState;
     }
     void clearState(){
