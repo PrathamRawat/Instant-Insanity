@@ -146,7 +146,7 @@ class Puzzle {
       state = newState;
     }
     void clearState(){
-      state = "";
+      state = new Colors[4][6];
     }
     
 class CubeGen{
