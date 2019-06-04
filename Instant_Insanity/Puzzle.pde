@@ -120,13 +120,13 @@ class Puzzle {
     
 class CubeGen{
 
-  String[][] cubeSet(String[][] tower){//returns in the form {top, left, front, right, bottom, back}
-    String[][] cubes = new String[4][6];
-    String[][] tow = newPuz();
+  Colors[][] cubeSet(Colors[][] tower){//returns in the form {top, left, front, right, bottom, back}
+    Colors[][] cubes = new Colors[4][6];
+    Colors[][] tow = newPuz();
     int topface = (int)(6 * Math.random());
     for(int i = 0; i < 4; i++){
       if(topface == 0){
-      String[] topandbot = topBot(tow[i]);
+      Colors[] topandbot = topBot(tow[i]);
       cubes[i][0] = topandbot[0];
       cubes[i][1] = tow[i][0];
       cubes[i][2] = tow[i][1];
@@ -135,7 +135,7 @@ class CubeGen{
       cubes[i][5] = tow[i][3];
     }
       if(topface == 1){
-      String[] topandbot = topBot(tow[i]);
+      Colors[] topandbot = topBot(tow[i]);
       cubes[i][0] = tow[i][0];
       cubes[i][1] = topandbot[1];
       cubes[i][2] = tow[i][1];
@@ -144,7 +144,7 @@ class CubeGen{
       cubes[i][5] = tow[i][3];
     }
       if(topface == 2){
-      String[] topandbot = topBot(tow[i]);
+      Colors[] topandbot = topBot(tow[i]);
       cubes[i][0] = tow[i][1];
       cubes[i][1] = tow[i][0];
       cubes[i][2] = topandbot[1];
@@ -153,7 +153,7 @@ class CubeGen{
       cubes[i][5] = topandbot[0];
     }
       if(topface == 3){
-      String[] topandbot = topBot(tow[i]);
+      Colors[] topandbot = topBot(tow[i]);
       cubes[i][0] = tow[i][2];
       cubes[i][1] = topandbot[0];
       cubes[i][2] = tow[i][1];
@@ -162,7 +162,7 @@ class CubeGen{
       cubes[i][5] = tow[i][3];
     }
       if(topface == 4){
-      String[] topandbot = topBot(tow[i]);
+      Colors[] topandbot = topBot(tow[i]);
       cubes[i][0] = topandbot[1];
       cubes[i][1] = tow[i][0];
       cubes[i][2] = tow[i][3];
@@ -171,7 +171,7 @@ class CubeGen{
       cubes[i][5] = tow[i][1];
     }
       if(topface == 5){
-      String[] topandbot = topBot(tow[i]);
+      Colors[] topandbot = topBot(tow[i]);
       cubes[i][0] = tow[i][3];
       cubes[i][1] = tow[i][0];
       cubes[i][2] = topandbot[0];
@@ -183,9 +183,9 @@ class CubeGen{
     return cubes;
   }
   
-  String[][] newPuz(){
-    String[] colors = {"r", "g", "b", "y"};
-    String[][] sides = new String[4][4];
+  Colors[][] newPuz(){
+    Colors[] colors = {Colors.RED, Colors.GREEN, Colors.BLUE, Colors.YELLOW};
+    Colors[][] sides = new Colors[4][4];
     for(int i = 0; i < 4; i++){
       ArrayList<Integer> options = new ArrayList<Integer>();
       for(int j = 0; j < 4; j++){
@@ -203,7 +203,7 @@ class CubeGen{
     for(int k = 0; k < 4; k++){
       int rot = (int) (4 * Math.random());
       for(int l = 0; l < 4; l++){
-        String temp = sides[k][(l + rot) % 4];
+        Colors temp = sides[k][(l + rot) % 4];
         sides[k][(l + rot) % 4] = sides[k][l];
         sides[k][l] = temp;
       }
@@ -211,64 +211,64 @@ class CubeGen{
     return sides;
   }
 
-  String[] topBot(String[] cube){
+  Colors[] topBot(Colors[] cube){
     int numDif = 4;
     int numred = 0;
     int numblue = 0;
     int numgreen = 0;
     int numyel = 0;
     for(int i = 0; i < 4; i++){
-      if(cube[i] == "r") numred++;
-      if(cube[i] == "b") numblue++;
-      if(cube[i] == "g") numgreen++;
-      if(cube[i] == "y") numyel++;
+      if(cube[i] == Colors.RED) numred++;
+      if(cube[i] == Colors.BLUE) numblue++;
+      if(cube[i] == Colors.GREEN) numgreen++;
+      if(cube[i] == Colors.YELLOW) numyel++;
     }
     if(numred == 0) numDif--;
     if(numblue == 0) numDif--;
     if(numgreen == 0) numDif--;
     if(numyel == 0) numDif--;
-    ArrayList<String> options = new ArrayList<String>();
-    String[] topandbot = new String[2];
+    ArrayList<Colors> options = new ArrayList<Colors>();
+    Colors[] topandbot = new Colors[2];
     if(numDif == 4){
-      options.add("r");
-      options.add("b");
-      options.add("g");
-      options.add("y");
+      options.add(Colors.RED);
+      options.add(Colors.BLUE);
+      options.add(Colors.GREEN);
+      options.add(Colors.YELLOW);
       for(int j = 0; j < 2; j++){
         topandbot[j] = options.get((int)(Math.random() * 4));
       }
     }//This covers the scenario of 4 distinct colors
     if(numDif == 3){
       if(numred == 0){
-        topandbot[0] = "r";
+        topandbot[0] = Colors.RED;
       }
       if(numblue == 0){
-        topandbot[0] = "b";
+        topandbot[0] = Colors.BLUE;
       }
       if(numgreen == 0){
-        topandbot[0] = "g";
+        topandbot[0] = Colors.GREEN;
       }
       if(numyel == 0){
-        topandbot[0] = "y";
+        topandbot[0] = Colors.YELLOW;
       }
-      options.add("r");
-      options.add("b");
-      options.add("g");
-      options.add("y");
+      options.add(Colors.RED);
+      options.add(Colors.BLUE);
+      options.add(Colors.GREEN);
+      options.add(Colors.YELLOW);
       topandbot[1] = options.get((int)(Math.random() * 4));
     }
     if(numDif == 2){
       if(numred == 0){
-        options.add("r");
+        options.add(Colors.RED);
       }
       if(numblue == 0){
-        options.add("b");
+        options.add(Colors.BLUE);
       }
       if(numgreen == 0){
-        options.add("g");
+        options.add(Colors.GREEN);
       }
       if(numyel == 0){
-        options.add("y");
+        options.add(Colors.YELLOW);
       }
       for(int j = 0; j < 2; j++){
         topandbot[j] = options.remove((int)(Math.random() * (2 - j)));
@@ -277,17 +277,17 @@ class CubeGen{
     return topandbot;
   }
   
-  boolean isBad(String[][] sides){
+  boolean isBad(Colors[][] sides){
     for(int r = 0; r < 4; r++){
       int numred = 0;
       int numblue = 0;
       int numgreen = 0;
       int numyel = 0;
       for(int c = 0; c < 4; c++){
-        if(sides[r][c] == "r") numred++;
-        if(sides[r][c] == "b") numblue++;
-        if(sides[r][c] == "g") numgreen++;
-        if(sides[r][c] == "y") numyel++;
+        if(sides[r][c] == Colors.RED) numred++;
+        if(sides[r][c] == Colors.BLUE) numblue++;
+        if(sides[r][c] == Colors.GREEN) numgreen++;
+        if(sides[r][c] == Colors.YELLOW) numyel++;
       }
        //System.out.println(numred + " " + numblue + " " + numgreen + " " + numyel);
       if(numred == 4 || numblue == 4 || numgreen == 4 || numyel == 4) return true;
