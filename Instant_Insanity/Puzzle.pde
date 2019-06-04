@@ -221,7 +221,7 @@ class CubeGen{
   }
   
   Colors[][] newPuz(){
-    Colors[] colors = {Colors.RED, Colors.GREEN, Colors.BLUE, Colors.YELLOW};
+    Colors[] colors = {Colors.RED, Colors.GREEN, Colors.BLUE, Colors.MAGENTA};
     Colors[][] sides = new Colors[4][4];
     for(int i = 0; i < 4; i++){
       ArrayList<Integer> options = new ArrayList<Integer>();
@@ -258,7 +258,7 @@ class CubeGen{
       if(cube[i] == Colors.RED) numred++;
       if(cube[i] == Colors.BLUE) numblue++;
       if(cube[i] == Colors.GREEN) numgreen++;
-      if(cube[i] == Colors.YELLOW) numyel++;
+      if(cube[i] == Colors.MAGENTA) numyel++;
     }
     if(numred == 0) numDif--;
     if(numblue == 0) numDif--;
@@ -270,7 +270,7 @@ class CubeGen{
       options.add(Colors.RED);
       options.add(Colors.BLUE);
       options.add(Colors.GREEN);
-      options.add(Colors.YELLOW);
+      options.add(Colors.MAGENTA);
       for(int j = 0; j < 2; j++){
         topandbot[j] = options.get((int)(Math.random() * 4));
       }
@@ -286,12 +286,12 @@ class CubeGen{
         topandbot[0] = Colors.GREEN;
       }
       if(numyel == 0){
-        topandbot[0] = Colors.YELLOW;
+        topandbot[0] = Colors.MAGENTA;
       }
       options.add(Colors.RED);
       options.add(Colors.BLUE);
       options.add(Colors.GREEN);
-      options.add(Colors.YELLOW);
+      options.add(Colors.MAGENTA);
       topandbot[1] = options.get((int)(Math.random() * 4));
     }
     if(numDif == 2){
@@ -305,7 +305,7 @@ class CubeGen{
         options.add(Colors.GREEN);
       }
       if(numyel == 0){
-        options.add(Colors.YELLOW);
+        options.add(Colors.MAGENTA);
       }
       for(int j = 0; j < 2; j++){
         topandbot[j] = options.remove((int)(Math.random() * (2 - j)));
@@ -324,7 +324,7 @@ class CubeGen{
         if(sides[r][c] == Colors.RED) numred++;
         if(sides[r][c] == Colors.BLUE) numblue++;
         if(sides[r][c] == Colors.GREEN) numgreen++;
-        if(sides[r][c] == Colors.YELLOW) numyel++;
+        if(sides[r][c] == Colors.MAGENTA) numyel++;
       }
        //System.out.println(numred + " " + numblue + " " + numgreen + " " + numyel);
       if(numred == 4 || numblue == 4 || numgreen == 4 || numyel == 4) return true;

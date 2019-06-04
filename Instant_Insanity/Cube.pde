@@ -4,7 +4,7 @@ enum Orientation {
 }
 
 enum Colors {
-  RED, BLUE, GREEN, YELLOW 
+  RED, BLUE, GREEN, MAGENTA 
 }
 
 enum Direction {
@@ -212,7 +212,7 @@ class Cube {
          case GREEN:
            fill(color(0, 255, 0));
            break;
-         case YELLOW:
+         case MAGENTA:
            fill(color(255, 0, 255));
            break;
        }
