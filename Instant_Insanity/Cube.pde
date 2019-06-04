@@ -198,6 +198,7 @@ class Cube {
     public Face(Orientation face, Colors faceColor, Cube owner) {
       this.owner = owner;
       this.face = face;
+      this.faceColor = faceColor;
     }
     
     void drawFace() {
