@@ -100,7 +100,31 @@ class Puzzle {
   void rot(int cube, int direction){
   }
   
-  void loadState(){
+  void loadState(GameState myState){
+    for(int cubenum = 0; cubenum < 4; cubenum++){
+      for(Orientation orientation : Orientation.values()){
+        switch(orientation){
+          case TOP_SIDE:
+            cubes[cubenum].faces[0].faceColor = myState[cubenum][0];
+            break;
+          case LEFT_SIDE:
+            cubes[cubenum].faces[1].faceColor = myState[cubenum][1];
+            break;
+          case FRONT_SIDE:
+            cubes[cubenum].faces[2].faceColor = myState[cubenum][2];
+            break;
+          case RIGHT_SIDE:
+            cubes[cubenum].faces[3].faceColor = myState[cubenum][3];
+            break;
+          case BOTTOM_SIDE:
+            cubes[cubenum].faces[4].faceColor = myState[cubenum][4];
+            break;
+          case BACK_SIDE:
+            cubes[cubenum].faces[5].faceColor = myState[cubenum][5];
+            break;
+        }
+      }
+    }
   }
   
   class GameState{
