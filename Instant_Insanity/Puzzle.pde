@@ -128,14 +128,21 @@ class Puzzle {
   }
   
   class GameState{
-    String state;
+    Colors[][] state;
     public GameState(){
-      state = "";
+      state = new Colors[4][6];
     }
     String toString(){
-      return state;
+      String result = "";
+      for(int i = 0; i < 4; i++){
+        for(int j = 0; j < 6; j++){
+          result += state[i][j];
+        }
+        result += "\n";
+      }
+      return result;
     }
-    void updateState(String newState){
+    void updateState(GameState newState){
       state = newState;
     }
     void clearState(){
