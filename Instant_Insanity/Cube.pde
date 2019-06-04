@@ -191,31 +191,30 @@ class Cube {
   class Face {
     
     Face oppositeFace;
-    color faceColor;
+    Colors faceColor;
     Orientation face;
     Cube owner;
     
     public Face(Orientation face, Colors faceColor, Cube owner) {
       this.owner = owner;
-       switch(faceColor) {
-         case RED:
-           this.faceColor = color(255, 0, 0);
-           break;
-         case BLUE:
-           this.faceColor = color(0, 0, 255);
-           break;
-         case GREEN:
-           this.faceColor = color(0, 255, 0);
-           break;
-         case YELLOW:
-           this.faceColor = color(255, 0, 255);
-           break;
-       }
-       this.face = face;
+      this.face = face;
     }
     
     void drawFace() {
-      fill(faceColor);
+      switch(faceColor) {
+         case RED:
+           fill(color(255, 0, 0));
+           break;
+         case BLUE:
+           fill(color(0, 0, 255));
+           break;
+         case GREEN:
+           fill(color(0, 255, 0));
+           break;
+         case YELLOW:
+           fill(color(255, 0, 255));
+           break;
+       }
       beginShape();
       switch(face) {
         case FRONT_SIDE:

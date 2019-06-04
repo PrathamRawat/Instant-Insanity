@@ -132,6 +132,7 @@ class Puzzle {
     public GameState(){
       state = new Colors[4][6];
     }
+    
     String toString(){
       String result = "";
       for(int i = 0; i < 4; i++){
@@ -142,6 +143,7 @@ class Puzzle {
       }
       return result;
     }
+    
     void updateState(GameState newState){
       state = newState;
     }
