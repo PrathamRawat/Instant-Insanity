@@ -17,7 +17,7 @@ class Puzzle {
     
     gameStates = new ArrayList<GameState>();
     gameState = new GameState();
-    gameState.updateState(cubeSet(newPuz()));
+    gameState.updateState(gameState.generator.cubeSet(gameState.generator.newPuz()));
   }
   
   void puzzle(String state){
@@ -130,8 +130,11 @@ class Puzzle {
   
   class GameState{
     Colors[][] state;
+    CubeGen generator;
+    
     public GameState(){
       state = new Colors[4][6];
+      generator = new CubeGen();
     }
     
     String toString(){
