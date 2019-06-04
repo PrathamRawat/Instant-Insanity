@@ -18,6 +18,7 @@ class Puzzle {
     gameStates = new ArrayList<GameState>();
     gameState = new GameState();
     gameState.updateState(gameState.generator.cubeSet(gameState.generator.newPuz()));
+    this.loadState(gameState);
   }
   
   void puzzle(String state){
