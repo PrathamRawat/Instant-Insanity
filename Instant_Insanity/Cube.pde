@@ -56,6 +56,8 @@ class Cube {
       isSelected = false;
     }
     
+    
+    
     void drawNextFrame(){
       updateState();
       for(Face face: faces) {
