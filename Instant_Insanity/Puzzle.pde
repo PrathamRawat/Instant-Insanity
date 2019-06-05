@@ -126,7 +126,7 @@ class Puzzle {
   }
   
   boolean isSolved() {
-     return false;
+     return gameState.cpuisSolved(gameState.state);
   }
   
   void loadState(GameState myState){
