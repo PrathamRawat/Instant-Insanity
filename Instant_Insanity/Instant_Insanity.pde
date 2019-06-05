@@ -30,7 +30,7 @@ void keyPressed() {
   if(key == 'l') {
     puzzle.moveSelectorRight();
   }
-  if(key == 'a') {
+  if(key == 'd') {
     puzzle.turnLeft();
   }
   if(key == 'w') {
@@ -39,7 +39,7 @@ void keyPressed() {
   if(key == 's') {
     puzzle.turnDown();
   }
-  if(key == 'd') {
+  if(key == 'a') {
     puzzle.turnRight();
   }
   if(key == 'i') {
