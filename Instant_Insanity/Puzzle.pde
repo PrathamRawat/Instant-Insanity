@@ -106,6 +106,7 @@ class Puzzle {
      int front = (int)random(4);
      gameState.orient(gameState.state, copy, i, top, front);
     }
+    loadState(gameState);
   }
   
   void updatePuzzleFrame() {
