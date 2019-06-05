@@ -159,7 +159,8 @@ class Puzzle {
     return gameState;
   }
   
-  void rot(int cube, int direction){
+  boolean isSolved() {
+     return false;
   }
   
   void loadState(GameState myState){

@@ -267,7 +267,7 @@ class Cube {
       translate(centerX, centerY, centerZ);
       //if(owner.turnDirection == Direction.TURN_UP || owner.turnDirection == Direction.TURN_DOWN)
       rotateX(xAngle);
-      rotateY(yAngle);
+      rotateZ(yAngle);
       drawFace();
       popMatrix();
     }
