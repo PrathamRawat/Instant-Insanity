@@ -88,60 +88,10 @@ class Puzzle {
   }
   
   void solve(){
-    int[][] orientations = gameState.generator.solve(gameState.state);
-    myprint(orientations);
-    for(int i = 0; i < 4; i++){
-      switch(orientations[i][0]){
-        case 0:
-          //print("none ");
-          break;
-        case 1:
-          Direction[] case1instructions = {Direction.TURN_RIGHT, Direction.TURN_UP, Direction.TURN_LEFT};
-          cubes[i].rotSequence(case1instructions);
-          //print("right ");
-          break;
-        case 2:
-          Direction[] case2instructions = {Direction.TURN_UP};
-          cubes[i].rotSequence(case2instructions);
-          //print("up ");
-          break;
-        case 3:
-          Direction[] case3instructions = {Direction.TURN_LEFT, Direction.TURN_UP, Direction.TURN_RIGHT};
-          cubes[i].rotSequence(case3instructions);
-          //print("left ");
-          break;
-        case 4:
-          Direction[] case4instructions = {Direction.TURN_UP, Direction.TURN_UP};
-          cubes[i].rotSequence(case4instructions);
-          //print("up-up ");
-          break;
-        case 5:
-          Direction[] case5instructions = {Direction.TURN_DOWN};
-          cubes[i].rotSequence(case5instructions);
-          //print("down ");
-          break;
-      }
-    //  cubes[i].rotate(Direction.TURN_RIGHT);
-    //  switch(orientations[i][1]){
-    //    case 0:
-    //      println("none");
-    //      break;
-    //    case 1:
-    //      cubes[i].rotate(Direction.TURN_UP);
-    //      println("left");
-    //      break;
-    //    case 2:
-    //      cubes[i].rotate(Direction.TURN_DOWN);
-    //      cubes[i].rotate(Direction.TURN_DOWN);
-    //      println("right-right");
-    //      break;
-    //    case 3:
-    //      cubes[i].rotate(Direction.TURN_DOWN);
-    //      println("right");
-    //      break;
-    //  }
-    //  cubes[i].rotate(Direction.TURN_LEFT);
-    }
+    gameState.generator.solve(gameState.state);
+    println();
+    println(this.gameState);
+    this.loadState(gameState);
   }
   
   void scramble(){
