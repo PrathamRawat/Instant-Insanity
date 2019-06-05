@@ -87,6 +87,13 @@ class Cube {
         case DEFAULT:
           break;
       }
+      Colors[][] newState = new Colors[4][6];
+      for(int i = 0; i < 4; i++){
+        for(int j = 0; j < 6; j++){
+          newState[i][j] = puzzle.cubes[i].faces[j].faceColor;
+        }
+      }
+      puzzle.gameState.updateState(newState);
     }
     
     void select(){

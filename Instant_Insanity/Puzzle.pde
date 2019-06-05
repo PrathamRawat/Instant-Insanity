@@ -89,8 +89,6 @@ class Puzzle {
   
   void solve(){
     gameState.generator.solve(gameState.state);
-    println();
-    println(this.gameState);
     this.loadState(gameState);
   }
   
@@ -154,7 +152,6 @@ class Puzzle {
         }
       }
     }
-    println(this.gameState);
   }
   
   class GameState{

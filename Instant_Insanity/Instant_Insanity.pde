@@ -9,15 +9,18 @@ void setup() {
 void draw() {
   background(180);
   //noStroke();
-  puzzle.updatePuzzleFrame();
-  puzzle.displayPuzzleFrame();
-  //cube.drawNextFrame();
   if(puzzle.isSolved()) {
     fill(0);
     PFont f = createFont("Arial",16,true);
-    textFont(f, 24);
+    textFont(f, 40);
     text("Solved!", displayWidth / 2, displayHeight / 3);  
   }
+  else{
+    background(180);
+  }
+  puzzle.updatePuzzleFrame();
+  puzzle.displayPuzzleFrame();
+  //cube.drawNextFrame();
 }
 
 void keyPressed() {
