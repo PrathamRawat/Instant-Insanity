@@ -4,7 +4,7 @@ This is a representation of the popular Cube puzzle, Instant Insanity.
 There are four cubes with different color faces on each, and the goal is to arrange the cubes in a stack such that each side of the tower does not contain the same color twice.
 While it may seem easy, it is much more difficult than it appears!
 Feel free to move an individual cube with ASDF, use J and L to select which cube you want to turn, and I and K to turn the entire rack up and down!
-Good luck solving! If you need help, use the spacebar to have the computer generate a solution.
+Good luck solving! If you need help, use the spacebar to have the computer generate a solution, and use the T key to rescramble the puzzle again .
 
 For more information on the puzzle, visit:
 https://en.wikipedia.org/wiki/Instant_Insanity
