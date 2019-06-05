@@ -168,22 +168,22 @@ class Puzzle {
       for(Orientation orientation : Orientation.values()){
         switch(orientation){
           case TOP_SIDE:
-            cubes[cubenum].faces[0].faceColor = myState.state[cubenum][0];
+            cubes[cubenum].faces[0].faceColor = myState.state[cubenum][5];
             break;
           case LEFT_SIDE:
             cubes[cubenum].faces[1].faceColor = myState.state[cubenum][1];
             break;
           case FRONT_SIDE:
-            cubes[cubenum].faces[2].faceColor = myState.state[cubenum][2];
+            cubes[cubenum].faces[2].faceColor = myState.state[cubenum][0];
             break;
           case RIGHT_SIDE:
             cubes[cubenum].faces[3].faceColor = myState.state[cubenum][3];
             break;
           case BOTTOM_SIDE:
-            cubes[cubenum].faces[4].faceColor = myState.state[cubenum][4];
+            cubes[cubenum].faces[4].faceColor = myState.state[cubenum][2];
             break;
           case REAR_SIDE:
-            cubes[cubenum].faces[5].faceColor = myState.state[cubenum][5];
+            cubes[cubenum].faces[5].faceColor = myState.state[cubenum][4];
             break;
         }
       }

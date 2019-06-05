@@ -39,4 +39,7 @@ void keyPressed() {
   if(key == 'k') {
     puzzle.turnAllDown();
   }
+  if(key == ' ') {
+    puzzle.solve();  
+  }
 }
