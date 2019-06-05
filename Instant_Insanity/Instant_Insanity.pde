@@ -39,6 +39,9 @@ void keyPressed() {
   if(key == 'k') {
     puzzle.turnAllDown();
   }
+  if(key == 't') {
+    puzzle.scramble();
+  }
   if(key == ' ') {
     puzzle.solve();  
   }

@@ -104,7 +104,7 @@ class Puzzle {
     for(int i = 0; i < 4; i++){
      int top = (int)random(6);
      int front = (int)random(4);
-     gameState.generator.orient(gameState.state, copy, i, top, front);
+     gameState.orient(gameState.state, copy, i, top, front);
     }
   }
   
