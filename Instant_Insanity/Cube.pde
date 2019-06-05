@@ -89,6 +89,17 @@ class Cube {
       }
     }
     
+    void rotSequence(Direction[] instructions){
+      for(Direction direction : instructions){
+        double startTime = System.currentTimeMillis();
+        double curtime = (System.currentTimeMillis() - startTime) / 1000.0;
+        this.rotate(direction);
+        while(curtime < ROT_TIME + 0.001){
+          curtime = (System.currentTimeMillis() - startTime) / 1000.0;
+        }
+      }
+    }
+    
     void select(){
       isSelected = ! isSelected;
     }
