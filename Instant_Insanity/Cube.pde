@@ -72,9 +72,7 @@ class Cube {
           updateVelocity();
           xAngle += xVelocity;
           yAngle += yVelocity;
-          println(yVelocity);
           double curtime = (System.currentTimeMillis() - timeStartTurning) / 1000.0;
-          println(curtime);
           //if(Math.abs(xAngle - targetXAngle) < 0.1 && Math.abs(yAngle - targetYAngle) < 0.1) {
           if(curtime >= ROT_TIME) {
             xAngle = targetXAngle;
@@ -144,32 +142,32 @@ class Cube {
       Face temp;
       switch(turnDirection) {
           case TURN_LEFT:
-            temp = faces[5];
-            faces[5] = faces[3];
-            faces[3] = faces[2];
-            faces[2] = faces[1];
+            temp = faces[0];
+            faces[0] = faces[3];
+            faces[3] = faces[4];
+            faces[4] = faces[1];
             faces[1] = temp;
             break;
           case TURN_RIGHT:
-            temp = faces[5];
-            faces[5] = faces[1];
-            faces[1] = faces[2];
-            faces[2] = faces[3];
+            temp = faces[0];
+            faces[0] = faces[1];
+            faces[1] = faces[4];
+            faces[4] = faces[3];
             faces[3] = temp;
             break;
           case TURN_DOWN:
-            temp = faces[5];
-            faces[5] = faces[0];
-            faces[0] = faces[2];
-            faces[2] = faces[4];
-            faces[4] = temp;
-            break;
-          case TURN_UP:
-            temp = faces[5];
+            temp = faces[0];
+            faces[0] = faces[5];
             faces[5] = faces[4];
             faces[4] = faces[2];
-            faces[2] = faces[0];
-            faces[0] = temp;
+            faces[2] = temp;
+            break;
+          case TURN_UP:
+            temp = faces[0];
+            faces[0] = faces[2];
+            faces[2] = faces[4];
+            faces[4] = faces[5];
+            faces[5] = temp;
             break;
           case NONE:
             break;
@@ -219,16 +217,16 @@ class Cube {
       beginShape();
       switch(face) {
         case FRONT_SIDE:
-            vertex(-size, -size, -size);
-            vertex(-size, size, -size);
-            vertex(size, size, -size);
-            vertex(size, -size, -size);
+            vertex(size, -size, size);
+            vertex(size, size, size);
+            vertex(-size, size, size);
+            vertex(-size, -size, size);
           break;
         case REAR_SIDE:
-          vertex(-size, -size, size);
-          vertex(-size, size, size);
-          vertex(size, size, size);
-          vertex(size, -size, size);
+          vertex(size, -size, -size);
+          vertex(size, size, -size);
+          vertex(-size, size, -size);
+          vertex(-size, -size, -size);
           break;
         case LEFT_SIDE:
           vertex(-size, -size, -size);
