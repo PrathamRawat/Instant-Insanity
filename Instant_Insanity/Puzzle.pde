@@ -76,8 +76,68 @@ class Puzzle {
   GameState saveState(){
     return gameState;
   }
+
+  void myprint(int[][] stuff){
+    for(int i = 0; i < stuff.length; i++){
+      for(int j = 0; j < stuff[0].length; j++){
+        print(stuff[i][j] + " ");
+      }
+      println();
+    }
+    println();
+  }
   
   void solve(){
+    int[][] orientations = gameState.generator.solve(gameState.state);
+    myprint(orientations);
+    for(int i = 0; i < 4; i++){
+      switch(orientations[i][0]){
+        case 0:
+          print("none ");
+          break;
+        case 1:
+          cubes[i].rotate(Direction.TURN_RIGHT);
+          print("right ");
+          break;
+        case 2:
+          cubes[i].rotate(Direction.TURN_UP);
+          print("up ");
+          break;
+        case 3:
+          cubes[i].rotate(Direction.TURN_LEFT);
+          print("left ");
+          break;
+        case 4:
+          cubes[i].rotate(Direction.TURN_UP);
+          cubes[i].rotate(Direction.TURN_UP);
+          print("up-up ");
+          break;
+        case 5:
+          cubes[i].rotate(Direction.TURN_DOWN);
+          print("down ");
+          break;
+      }
+      cubes[i].rotate(Direction.TURN_RIGHT);
+      switch(orientations[i][1]){
+        case 0:
+          println("none");
+          break;
+        case 1:
+          cubes[i].rotate(Direction.TURN_UP);
+          println("left");
+          break;
+        case 2:
+          cubes[i].rotate(Direction.TURN_DOWN);
+          cubes[i].rotate(Direction.TURN_DOWN);
+          println("right-right");
+          break;
+        case 3:
+          cubes[i].rotate(Direction.TURN_DOWN);
+          println("right");
+          break;
+      }
+      cubes[i].rotate(Direction.TURN_LEFT);
+    }
   }
   
   void scramble(){
@@ -127,6 +187,7 @@ class Puzzle {
         }
       }
     }
+    println(this.gameState);
   }
   
   class GameState{
@@ -142,7 +203,7 @@ class Puzzle {
       String result = "";
       for(int i = 0; i < 4; i++){
         for(int j = 0; j < 6; j++){
-          result += state[i][j];
+          result += state[i][j] + " ";
         }
         result += "\n";
       }
@@ -240,11 +301,13 @@ class CubeGen{
     }
     for(int k = 0; k < 4; k++){
       int rot = (int) (4 * Math.random());
-      for(int l = 0; l < 4; l++){
-        Colors temp = sides[k][(l + rot) % 4];
-        sides[k][(l + rot) % 4] = sides[k][l];
-        sides[k][l] = temp;
+      for(int x = 0; x < rot; x++){
+        Colors temp = sides[k][0];
+      for(int l = 0; l < 3; l++){
+        sides[k][l] = sides[k][l + 1];
       }
+      sides[k][3] = temp;
+    }
     }
     return sides;
   }
@@ -332,6 +395,160 @@ class CubeGen{
     }
     return false;
   }
+  
+  int[][] solve(Colors[][] puz){
+      Colors[][] orig = new Colors[4][6];
+      for(int i = 0; i < 4; i++){
+        for(int j = 0; j < 6; j++){
+          orig[i][j] = puz[i][j];
+        }
+      }
+      int[][] orientations = new int[4][2];
+      return solveH(puz, orig, 0, orientations);
+    }
+
+  int[][] solveH(Colors[][] puz, Colors[][] orig, int cubenum, int[][] orientations){//returns instructions for how to rotate cubes into solved position
+    //also modifies the puzzle's game state
+    if(cubenum == 4){
+      if(cpuisSolved(puz)) return orientations;
+      return new int[5][2];
+    }
+    else{
+      for(int top = 0; top < 6; top++){
+        if(cubenum == 0){
+          orient(puz, orig, cubenum, top, 0);
+          orientations[cubenum][0] = top;
+          orientations[cubenum][1] = 0;
+          int[][] result = solveH(puz, orig, cubenum + 1, orientations);
+          if(result.length == 4) return result;
+        }
+          for(int i = 0; i < 6; i++){
+            puz[cubenum][i] = orig[cubenum][i];
+          }
+        if(cubenum > 0){
+          for(int front = 0; front < 4; front++){
+          orient(puz, orig, cubenum, top, front);
+          orientations[cubenum][0] = top;
+          orientations[cubenum][1] = front;
+          int[][] result = solveH(puz, orig, cubenum + 1, orientations);
+          if(result.length == 4) return result;
+          for(int i = 0; i < 6; i++){
+            puz[cubenum][i] = orig[cubenum][i];
+          }
+        }
+        }
+      }
+      }
+    return new int[5][2];
+  }
+  }
+
+  void orient(Colors[][] puz, Colors[][] puzorig, int cubenum, int top, int front){
+    if(top == 0){
+      puz[cubenum][0] = puzorig[cubenum][0];
+      puz[cubenum][1] = puzorig[cubenum][1];
+      puz[cubenum][2] = puzorig[cubenum][2];
+      puz[cubenum][3] = puzorig[cubenum][3];
+      puz[cubenum][4] = puzorig[cubenum][4];
+      puz[cubenum][5] = puzorig[cubenum][5];
+    }
+
+    if(top == 1){
+      puz[cubenum][0] = puzorig[cubenum][1];
+      puz[cubenum][1] = puzorig[cubenum][4];
+      puz[cubenum][2] = puzorig[cubenum][2];
+      puz[cubenum][3] = puzorig[cubenum][0];
+      puz[cubenum][4] = puzorig[cubenum][3];
+      puz[cubenum][5] = puzorig[cubenum][5];
+    }
+
+    if(top == 2){
+      puz[cubenum][0] = puzorig[cubenum][2];
+      puz[cubenum][1] = puzorig[cubenum][1];
+      puz[cubenum][2] = puzorig[cubenum][4];
+      puz[cubenum][3] = puzorig[cubenum][3];
+      puz[cubenum][4] = puzorig[cubenum][5];
+      puz[cubenum][5] = puzorig[cubenum][0];
+    }
+
+    if(top == 3){
+      puz[cubenum][0] = puzorig[cubenum][3];
+      puz[cubenum][1] = puzorig[cubenum][0];
+      puz[cubenum][2] = puzorig[cubenum][2];
+      puz[cubenum][3] = puzorig[cubenum][4];
+      puz[cubenum][4] = puzorig[cubenum][1];
+      puz[cubenum][5] = puzorig[cubenum][5];
+    }
+
+    if(top == 4){
+      puz[cubenum][0] = puzorig[cubenum][4];
+      puz[cubenum][1] = puzorig[cubenum][1];
+      puz[cubenum][2] = puzorig[cubenum][5];
+      puz[cubenum][3] = puzorig[cubenum][3];
+      puz[cubenum][4] = puzorig[cubenum][0];
+      puz[cubenum][5] = puzorig[cubenum][2];
+    }
+
+    if(top == 5){
+      puz[cubenum][0] = puzorig[cubenum][5];
+      puz[cubenum][1] = puzorig[cubenum][1];
+      puz[cubenum][2] = puzorig[cubenum][0];
+      puz[cubenum][3] = puzorig[cubenum][3];
+      puz[cubenum][4] = puzorig[cubenum][2];
+      puz[cubenum][5] = puzorig[cubenum][4];
+    }
+    
+    Colors[][] saved = new Colors[4][6];
+
+    for(int i = 0; i < 4; i++){
+      for(int j = 0; j < 6; j++){
+        saved[i][j] = puz[i][j];
+      }
+    }
+    if(front == 0){
+       puz[cubenum][1] = saved[cubenum][1];
+       puz[cubenum][2] = saved[cubenum][2];
+       puz[cubenum][3] = saved[cubenum][3];
+       puz[cubenum][5] = saved[cubenum][5];
+     }
+     if(front == 1){
+       puz[cubenum][1] = saved[cubenum][2];
+       puz[cubenum][2] = saved[cubenum][3];
+       puz[cubenum][3] = saved[cubenum][5];
+       puz[cubenum][5] = saved[cubenum][1];
+     }
+     if(front == 2){
+       puz[cubenum][1] = saved[cubenum][3];
+       puz[cubenum][2] = saved[cubenum][5];
+       puz[cubenum][3] = saved[cubenum][1];
+       puz[cubenum][5] = saved[cubenum][2];
+     }
+     if(front == 3){
+       puz[cubenum][1] = saved[cubenum][5];
+       puz[cubenum][2] = saved[cubenum][1];
+       puz[cubenum][3] = saved[cubenum][2];
+       puz[cubenum][5] = saved[cubenum][3];
+     }
+  }
+
+  boolean cpuisSolved(Colors[][] puz){      
+    int[] search  = {1, 2, 3, 5};
+    for(int i = 0; i < 4; i++){
+      boolean isRed = false;
+      boolean isBlue = false;
+      boolean isGreen = false;
+      boolean isMag = false;
+      for(int j = 0; j < 4; j++){
+        if(puz[j][search[i]] == Colors.RED) isRed = true;
+        if(puz[j][search[i]] == Colors.BLUE) isBlue = true;
+        if(puz[j][search[i]] == Colors.GREEN) isGreen = true;
+        if(puz[j][search[i]] == Colors.MAGENTA) isMag = true;
+      }
+      if(!(isRed && isBlue && isGreen && isMag)) return false;
+    }
+    return true;
+  }
+  
 }
     
     
@@ -339,4 +556,3 @@ class CubeGen{
   }
   
   
-}
