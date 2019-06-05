@@ -487,7 +487,7 @@ class CubeGen{
   }
 
   boolean cpuisSolved(Colors[][] puz){      
-    int[] search  = {1, 2, 3, 5};
+    int[] search  = {0, 2, 4, 5};
     for(int i = 0; i < 4; i++){
       boolean isRed = false;
       boolean isBlue = false;
