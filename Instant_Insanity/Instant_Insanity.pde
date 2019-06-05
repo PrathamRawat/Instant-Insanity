@@ -12,6 +12,12 @@ void draw() {
   puzzle.updatePuzzleFrame();
   puzzle.displayPuzzleFrame();
   //cube.drawNextFrame();
+  if(puzzle.isSolved()) {
+    fill(0);
+    PFont f = createFont("Arial",16,true);
+    textFont(f, 24);
+    text("Solved!", displayWidth / 2, displayHeight / 3);  
+  }
 }
 
 void keyPressed() {
